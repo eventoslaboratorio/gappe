@@ -15,6 +15,7 @@ import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 import Fab from '@material-ui/core/Fab';
 import CardEvento from './CardEvento';
+import PersonIcon from '@material-ui/icons/Person';
 
 export default class VisualizadorEvento extends React.Component {
     constructor() {
@@ -75,7 +76,7 @@ export default class VisualizadorEvento extends React.Component {
                     }
 
                     {this.state.acao == "Programação" && this.props.evento.subevents &&
-                        Object.values(this.props.evento.subevents).map((subevento) =>
+                        this.props.evento.subevents.map((subevento) =>
                             <CardEvento
                                 onCarregarEvento={this.carregarEvento}
                                 modo={this.props.evento.subEventDisplay}
@@ -120,6 +121,19 @@ class Informacao extends React.Component {
                                 <DateRangeIcon color="primary" style={{ margin: "5px" }} />
                                 {this.props.evento.dateInit + (this.props.evento.dateEnd ? (" - " + this.props.evento.dateEnd) : "")}
                             </Grid></Typography></div>}
+                    {(this.props.evento.speaker) && <div>
+
+                        <Typography style={{ color: "gray" }} variant="h6" >
+                            <Grid
+                                container
+                                direction="row"
+                                alignItems="center"
+                            >
+
+                                <PersonIcon color="primary" style={{ margin: "5px" }} />
+                                {this.props.evento.speaker}
+                            </Grid></Typography></div>}
+
                     <div style={{ overflow: "auto", flexGrow: "1" }}>
                         {this.props.evento.informacaoLogo
                             && this.props.evento.logo
