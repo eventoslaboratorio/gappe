@@ -20,7 +20,7 @@ export default class AdicionarEvento extends React.Component {
   }
 
   render() {
-    if (this.state.modo == 'semEventos') {
+    if (this.state.modo === 'semEventos') {
       return <Grid item xs >
 
         <Typography variant="h3" align="center"><br /><br />Você não possui nenhum evento cadastrado<br /><br /> </Typography>,
@@ -35,12 +35,12 @@ export default class AdicionarEvento extends React.Component {
       </Grid>
     }
 
-    if (this.props.modo == 'qrcode')
+    if (this.props.modo === 'qrcode')
       return [
         <Grid item xs style={{ overflow: "auto" }} >
           {this.state.eventos.map(item => <Paper style={{ textAlign: "center" }}>
             {item.id} - {item.name}<br />
-            <img src={item.logo} style={{ width: "90%" }} />
+            <img src={item.logo} alt={item.logo} style={{ width: "90%" }} />
           </Paper>)}
         </Grid>
       ];
