@@ -1,5 +1,5 @@
 import React from 'react';
-import API from "../API";
+import API from "../config/API";
 
 import {
     CircularProgress,
@@ -44,6 +44,7 @@ export default class TelaCadastro extends React.Component {
                     <CircularProgress disableShrink />
                 </Grid>
             )
+
         return (
             <ListaEventos
                 eventos={this.state.eventos}

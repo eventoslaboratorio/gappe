@@ -1,6 +1,6 @@
 import React from 'react';
 import VisualizadorEvento from '../evento/VisualizadorEvento';
-import API from "../API";
+import API from "../config/API";
 
 export default class TelaEvento extends React.Component {
 
