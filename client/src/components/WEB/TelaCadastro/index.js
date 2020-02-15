@@ -1,13 +1,13 @@
-import React from 'react';
-import API from "../config/API";
+import React, { Component } from 'react';
+import API from "../../../config/API";
 
 import {
     CircularProgress,
     Grid
 } from '@material-ui/core';
-import ListaEventos from './ListaEventos';
+import ListaEventos from '../ListaEventos';
 
-export default class TelaCadastro extends React.Component {
+export default class TelaCadastro extends Component {
 
     constructor(props) {
         super(props);

@@ -1,7 +1,10 @@
-import React from 'react';
-import Typography from '@material-ui/core/Typography';
-import { Paper, IconButton } from '@material-ui/core';
-import ButtonBase from '@material-ui/core/ButtonBase';
+import React, { Component } from 'react';
+import {
+    Paper,
+    IconButton,
+    Typography,
+    ButtonBase,
+} from '@material-ui/core';
 import StarBorderIcon from '@material-ui/icons/StarBorder';
 const TamanhoModo = {
     "name": "100px",
@@ -10,7 +13,7 @@ const TamanhoModo = {
     "img3": "30vh",
     "prog": "25vh"
 };
-export default class CardEvento extends React.Component {
+export default class CardEvento extends Component {
     render() {
         console.log(this.props);
         return (

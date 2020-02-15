@@ -8,8 +8,8 @@ const { onCreate, onDelete } = require('./src/triggers/User')
 require('./src/config/routes')(app)
 
 app.use(express.json())
-app.use(cors({ origin: true }))
 app.use(bodyParser.json());
+app.use(cors({ origin: true }))
 
 exports.api = functions.https.onRequest(app);
 

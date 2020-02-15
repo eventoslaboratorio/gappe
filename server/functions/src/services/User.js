@@ -1,34 +1,36 @@
-const jwt = require('jwt-simple')
-const bcrypt = require('bcrypt')
+const { firebase } = require('../config/firebase')
+const { encode, decode } = require('../config/JWT')
+const { incripit, decripit } = require('../config/AUTH')
+const { getEmail } = require('./GetEmail')
 
-const { firebase, auth } = require('../config/firebase')
-
+const ref = firebase.database().ref('users')
 module.exports = {
     async login(req, res, next) {
+        if (!req.body.email || !req.body.password)
+            return res.json({ error: 'Usuário/Senha inválio email 1' })
 
-        const user = await firebase.database().ref('users')
-            .orderByChild('email')
-            .equalTo(req.body.email)
-            .limitToFirst(1)
-            .once('value')
+        const user = await getEmail(req.body.email)
 
-        if (!user.val()) return res.json({ error: 'Usuário/Senha inválio' })
+        if (!user) return res.json({ error: 'Usuário/Senha inválio email 2' })
 
         const [{ email, name, password }] = Object.values(user.val());
         const [uid] = Object.keys(user.val());
 
-        const equals = bcrypt.compareSync(req.body.password, password)
+        const equals = decripit(req.body.password, password)
 
-        if (!equals) return res.json({ error: 'Usuário/Senha inválio' })
+        if (!equals) return res.json({ error: 'Usuário/Senha inválio 3' })
 
-        let additionalClaims = {
-            premiumAccount: true,
+        // segundos
+        const agora = Math.floor(Date.now() / 1000)
+        let userJWT = {
             uid,
             email,
             name,
+            iat: agora,
+            exp: agora + (60)
         };
 
-        const token = await auth.createCustomToken(uid, additionalClaims)
+        const token = encode(userJWT)
 
         return res.json({
             user: { email, name },
@@ -37,28 +39,29 @@ module.exports = {
     },
     async store(req, res, next) {
         const { password, name, email } = req.body
+        const userEmailBanco = await getEmail(email)
 
-        const userEmail = await firebase.database().ref('users')
-            .orderByChild('email')
-            .equalTo(email)
-            .limitToFirst(1)
-            .once('value')
+        if (userEmailBanco) return res.json({ error: 'Email indisponível' })
 
-        if (userEmail.val())
-            return res.json({ error: 'Email já cadastrado' })
-
-        const salt = bcrypt.genSaltSync()
         const user = {
             name,
             email,
-            password: bcrypt.hashSync(password, salt)
+            password: incripit(password)
         }
 
-        const response = await firebase.database().ref('users').push(user)
+        const response = await ref.push(user)
 
-        const userRes = await firebase.database().ref('users').child(response.key)
-            .limitToFirst(2).once('value')
+        const userAdd = await ref.child(response.key).limitToFirst(2).once('value')
 
-        return res.json(userRes.val())
+        return res.json(userAdd.val())
+    },
+    async validarToken(req, res, next) {
+        try {
+            const response = await decode(req.headers.token)
+
+            return res.json(response)
+        } catch (error) {
+            return res.json({ error: 'Sessão expirada' })
+        }
     }
 }

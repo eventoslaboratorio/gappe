@@ -1,5 +1,6 @@
 /* eslint-disable consistent-return */
-const { firebase, configEvent, configURL } = require('../config/firebase')
+const { firebase } = require('../config/firebase')
+const { configEvent, configURL } = require('../config/config')
 
 module.exports = {
     async index(req, res, next) {
