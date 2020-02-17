@@ -39,7 +39,10 @@ export default class TelaCadastro extends Component {
                     direction="row"
                     justify="center"
                     alignItems="center"
-                    style={{ marginTop: 300 }}
+                    style={{
+                        marginTop: "25%",
+                        marginBottom: "80%"
+                    }}
                 >
                     <CircularProgress disableShrink />
                 </Grid>

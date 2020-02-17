@@ -9,5 +9,6 @@ module.exports = {
     }),
     auth: firebaseApp.auth(),
     userAdd: functions.auth,
+    eventAdd: functions.database,
     configJWT: serviceAccount.private_key
 }

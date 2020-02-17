@@ -1,5 +1,5 @@
 const jwt = require('jwt-simple')
-const { configJWT } = require('./firebase')
+const { configJWT } = require('../firebase')
 
 module.exports = {
     encode(user) {

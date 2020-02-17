@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {
     Grid,
     TextField,
-    Button
+    Button,
 } from '@material-ui/core/';
 
 import API from '../../../config/API'
@@ -18,7 +18,8 @@ export default class Login extends Component {
     initialState = () => {
         return {
             email: "",
-            password: ""
+            password: "",
+            error: ""
         }
     }
 
@@ -28,10 +29,13 @@ export default class Login extends Component {
             password: this.state.password,
         }
 
-        const response = await API.get('/user', user)
-
-        console.log(response.data);
-        console.log(user);
+        try {
+            const response = await API.post('/user/login', user)
+            this.setState(this.initialState())
+            this.setState(response.data)
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     render() {
@@ -46,6 +50,7 @@ export default class Login extends Component {
                     marginBottom: "80%"
                 }}
             >
+                {this.state.error ? <div style={{ color: "red" }}>{this.state.error}</div> : ""}
                 <TextField
                     required
                     color='primary'

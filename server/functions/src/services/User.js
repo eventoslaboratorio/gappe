@@ -1,28 +1,32 @@
 const { firebase } = require('../config/firebase')
-const { encode, decode } = require('../config/JWT')
-const { incripit, decripit } = require('../config/AUTH')
+const { encode, decode } = require('../config/authentication/JWT')
+const { incripit, decripit } = require('../config/authentication/AUTH')
 const { getEmail } = require('./GetEmail')
 
 const ref = firebase.database().ref('users')
 module.exports = {
     async login(req, res, next) {
+        const error = 'Usuário ou Senha inválido'
+
+        console.log(req.body);
+
         if (!req.body.email || !req.body.password)
-            return res.json({ error: 'Usuário/Senha inválio email 1' })
+            return res.json({ error })
 
         const user = await getEmail(req.body.email)
 
-        if (!user) return res.json({ error: 'Usuário/Senha inválio email 2' })
+        if (!user.val()) return res.json({ error })
 
         const [{ email, name, password }] = Object.values(user.val());
         const [uid] = Object.keys(user.val());
 
         const equals = decripit(req.body.password, password)
 
-        if (!equals) return res.json({ error: 'Usuário/Senha inválio 3' })
+        if (!equals) return res.json({ error })
 
         // segundos
         const agora = Math.floor(Date.now() / 1000)
-        let userJWT = {
+        const userJWT = {
             uid,
             email,
             name,
@@ -38,10 +42,12 @@ module.exports = {
         })
     },
     async store(req, res, next) {
+        const error = 'Email indisponível'
         const { password, name, email } = req.body
+
         const userEmailBanco = await getEmail(email)
 
-        if (userEmailBanco) return res.json({ error: 'Email indisponível' })
+        if (userEmailBanco.val()) return res.json({ error })
 
         const user = {
             name,
@@ -56,12 +62,13 @@ module.exports = {
         return res.json(userAdd.val())
     },
     async validarToken(req, res, next) {
+        const error = 'Sessão expirada'
         try {
             const response = await decode(req.headers.token)
 
             return res.json(response)
-        } catch (error) {
-            return res.json({ error: 'Sessão expirada' })
+        } catch (erro) {
+            return res.json({ error })
         }
     }
 }

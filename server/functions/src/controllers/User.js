@@ -1,7 +1,7 @@
 const { login, store, validarToken } = require('../services/User')
 
 module.exports = app => {
-    app.get('/user', login);
-    app.post('/user', store);
-    app.put('/user', validarToken);
+    app.post('/user/login', login);
+    app.post('/user/add', store);
+    app.get('/user/token', validarToken);
 }

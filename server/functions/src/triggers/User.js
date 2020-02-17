@@ -5,7 +5,6 @@ module.exports = {
         const userObject = {
             email: user.email,
             uid: user.uid,
-            password: user.pas
         }
         firebase.database().ref(`users/${user.uid}`).set(userObject)
         return true;
