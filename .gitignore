@@ -69,3 +69,5 @@ node_modules/
 
 # dotenv environment variables file
 .env
+client/yarn.lock
+server/yarn.lock

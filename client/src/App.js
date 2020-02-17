@@ -21,6 +21,7 @@ import "moment/locale/pt-br";
 
 import Main from './pages/Main';
 import Login from './components/WEB/Login';
+import VisualizadorAPP from './components/APP/VisualizadorAPP';
 
 moment.locale("pt-br");
 
@@ -58,6 +59,11 @@ export default class App extends React.Component {
   constructor() {
     super();
     this.state = { acao: "Informações", eventos: [] };
+    this.state.app=true;
+    if(window.cordova) {
+      this.state.app=true;
+
+    }
   }
 
 
@@ -69,8 +75,8 @@ export default class App extends React.Component {
           <div
             style={{ height: "100vh", width: "100vw", overflow: "hidden" }}
           >
-            {/* <Main /> */}
-            <Login />
+            {this.state.app?<VisualizadorAPP />:<Main />}
+            {/* <Login /> */}
           </div>
         </MuiThemeProvider>
       </MuiPickersUtilsProvider>

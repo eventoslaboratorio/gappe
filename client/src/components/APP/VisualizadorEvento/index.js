@@ -17,13 +17,9 @@ import AssignmentIcon from '@material-ui/icons/Assignment';
 import StarIcon from '@material-ui/icons/Star';
 import MapIcon from '@material-ui/icons/Map';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
-
-<<<<<<< HEAD:client/src/evento/VisualizadorEvento.js
-import CardEvento from './CardEvento';
-import PersonIcon from '@material-ui/icons/Person';
-=======
 import CardEvento from '../CardEvento';
->>>>>>> 2b4abb2f0adbadc6cb0f425367559a3ef13fd13e:client/src/components/APP/VisualizadorEvento/index.js
+import PersonIcon from '@material-ui/icons/Person';
+
 
 export default class VisualizadorEvento extends Component {
     constructor() {

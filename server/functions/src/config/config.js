@@ -1,11 +1,15 @@
+const TradutorModo = {
+    subevents: "subevents",
+    img: "imagem"
+};
+
 module.exports = {
     configURL(req) {
-        const TradutorModo = {
-            subevents: "subevents",
-            img: "imagem"
-        };
-
         let resposta = {};
+        if(req.query) {
+            if(req.query.events)
+                resposta.events=req.query.events;
+        }
         resposta.uri = "events/";
         if (!req.params[0] || req.params[0] === "/")
             resposta.modo = "raiz";

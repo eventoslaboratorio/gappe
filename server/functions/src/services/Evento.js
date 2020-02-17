@@ -5,7 +5,8 @@ const { configEvent, configURL } = require('../config/config')
 module.exports = {
     async index(req, res, next) {
         try {
-            const config = configURL(req)
+            const config = configURL(req);
+            console.log(config);
 
             await firebase
                 .database()
@@ -17,12 +18,13 @@ module.exports = {
                         const chaves = Object.keys(val);
                         let events = [];
                         for (const chave of chaves) {
-                            events.push(
-                                configEvent({
-                                    chaveRaiz: chave,
-                                    modo: "item",
-                                    uri: "events/" + chave
-                                }, val[chave]));
+                            if(!config.events||config.events.includes(chave))
+                                events.push(
+                                    configEvent({
+                                        chaveRaiz: chave,
+                                        modo: "item",
+                                        uri: "events/" + chave
+                                    }, val[chave]));
                         }
                         return events;
                     }
