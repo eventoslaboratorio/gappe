@@ -1,5 +1,10 @@
 import React from 'react';
 import API from "../API";
+
+import {
+    CircularProgress,
+    Grid
+} from '@material-ui/core';
 import ListaEventos from './ListaEventos';
 
 export default class TelaCadastro extends React.Component {
@@ -26,13 +31,25 @@ export default class TelaCadastro extends React.Component {
         }
     }
 
-
     render() {
         if (this.state.carregando)
-            return <div>Carregando ... </div>;
-        return <ListaEventos
-            eventos={this.state.eventos}
-            onDelete={this.delete}
-            onChange={this.carregar} />
+            return (
+                <Grid
+                    container
+                    direction="row"
+                    justify="center"
+                    alignItems="center"
+                    style={{ marginTop: 300 }}
+                >
+                    <CircularProgress disableShrink />
+                </Grid>
+            )
+        return (
+            <ListaEventos
+                eventos={this.state.eventos}
+                onDelete={this.delete}
+                onChange={this.carregar}
+            />
+        )
     }
 }

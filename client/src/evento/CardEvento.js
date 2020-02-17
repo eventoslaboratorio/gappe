@@ -15,7 +15,7 @@ export default class CardEvento extends React.Component {
         console.log(this.props);
         return (
             <Paper style={{ margin: "10px", marginBottom: "15px", height: TamanhoModo[this.props.modo] }} elevation={2}>
-                {this.props.modo == "prog" &&
+                {this.props.modo === "prog" &&
                     <ButtonBase
                         onClick={() => this.props.onCarregarEvento(this.props.evento)}
                         style={{ display: "block", padding: "5px", alignItems: "center", width: "100%", height: "100%", justifyContent: "center" }}>
@@ -48,7 +48,7 @@ export default class CardEvento extends React.Component {
 
 
 
-                {this.props.modo == "name" &&
+                {this.props.modo === "name" &&
                     <ButtonBase
                         onClick={() => this.props.onCarregarEvento(this.props.evento)}
                         style={{ display: "flex", padding: "5px", alignItems: "center", width: "100%", height: "100%", justifyContent: "center" }}>
@@ -61,7 +61,9 @@ export default class CardEvento extends React.Component {
                     <ButtonBase
                         onClick={() => this.props.onCarregarEvento(this.props.evento)}
                         style={{ display: "flex", padding: "5px", alignItems: "center", width: "100%", height: "100%", justifyContent: "center" }}>
-                        <img src={this.props.evento.logo}
+                        <img
+                            src={this.props.evento.logo}
+                            alt={this.props.evento.logo}
                             style={{
                                 display: "block",
                                 height: "100%",
