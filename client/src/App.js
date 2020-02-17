@@ -18,8 +18,12 @@ import MomentUtils from '@date-io/moment';
 import moment from "moment";
 import "moment/locale/pt-br";
 
-import Main from './Main';
+
+import Main from './pages/Main';
+import Login from './components/WEB/Login';
+
 moment.locale("pt-br");
+
 
 let theme = createMuiTheme({
   fontFamily: [
@@ -65,7 +69,8 @@ export default class App extends React.Component {
           <div
             style={{ height: "100vh", width: "100vw", overflow: "hidden" }}
           >
-            <Main />
+            {/* <Main /> */}
+            <Login />
           </div>
         </MuiThemeProvider>
       </MuiPickersUtilsProvider>
@@ -92,7 +97,7 @@ export default class App extends React.Component {
                   </IconButton>
                   <Typography variant="h5" style={{ color: "white" }}>
                     GAppE
-          </Typography>
+                  </Typography>
                 </Toolbar>
               </AppBar>
             </Grid>

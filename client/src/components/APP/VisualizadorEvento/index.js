@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import {
     Grid,
     AppBar,
@@ -18,10 +18,14 @@ import StarIcon from '@material-ui/icons/Star';
 import MapIcon from '@material-ui/icons/Map';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 
+<<<<<<< HEAD:client/src/evento/VisualizadorEvento.js
 import CardEvento from './CardEvento';
 import PersonIcon from '@material-ui/icons/Person';
+=======
+import CardEvento from '../CardEvento';
+>>>>>>> 2b4abb2f0adbadc6cb0f425367559a3ef13fd13e:client/src/components/APP/VisualizadorEvento/index.js
 
-export default class VisualizadorEvento extends React.Component {
+export default class VisualizadorEvento extends Component {
     constructor() {
         super();
         this.state = { acao: "Informações" }; //{ acao: "Programação" }; //
@@ -108,7 +112,7 @@ export default class VisualizadorEvento extends React.Component {
 
 }
 
-class Informacao extends React.Component {
+class Informacao extends Component {
     render() {
         return (
             <Grid style={{ margin: "10px", height: "calc(100% - 10px)", marginBottom: "0px" }}>

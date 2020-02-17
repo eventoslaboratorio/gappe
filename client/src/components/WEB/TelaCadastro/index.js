@@ -1,13 +1,13 @@
-import React from 'react';
-import API from "../API";
+import React, { Component } from 'react';
+import API from "../../../config/API";
 
 import {
     CircularProgress,
     Grid
 } from '@material-ui/core';
-import ListaEventos from './ListaEventos';
+import ListaEventos from '../ListaEventos';
 
-export default class TelaCadastro extends React.Component {
+export default class TelaCadastro extends Component {
 
     constructor(props) {
         super(props);
@@ -39,11 +39,15 @@ export default class TelaCadastro extends React.Component {
                     direction="row"
                     justify="center"
                     alignItems="center"
-                    style={{ marginTop: 300 }}
+                    style={{
+                        marginTop: "25%",
+                        marginBottom: "80%"
+                    }}
                 >
                     <CircularProgress disableShrink />
                 </Grid>
             )
+
         return (
             <ListaEventos
                 eventos={this.state.eventos}
