@@ -40,7 +40,7 @@ export default class TelaCadastro extends Component {
                     justify="center"
                     alignItems="center"
                     style={{
-                        marginTop: "25%",
+                        marginTop: "50%",
                         marginBottom: "80%"
                     }}
                 >

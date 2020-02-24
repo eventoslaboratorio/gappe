@@ -1,9 +1,14 @@
 /* eslint-disable consistent-return */
 const { firebase } = require('../config/firebase')
 const { configEvent, configURL } = require('../config/config')
+const { decode } = require('../config/authentication/JWT')
 
 module.exports = {
     async index(req, res, next) {
+        const { token } = req.headers
+        // const response = await decode(token)
+        // if (!response) return res.json({ error: 'error' })
+        console.log("token", req.headers);
         try {
             const config = configURL(req);
             console.log(config);
@@ -18,7 +23,7 @@ module.exports = {
                         const chaves = Object.keys(val);
                         let events = [];
                         for (const chave of chaves) {
-                            if(!config.events||config.events.includes(chave))
+                            if (!config.events || config.events.includes(chave))
                                 events.push(
                                     configEvent({
                                         chaveRaiz: chave,

@@ -58,12 +58,16 @@ const theme = createMuiTheme({
 export default class App extends React.Component {
   constructor() {
     super();
-    this.state = { acao: "Informações", eventos: [] };
-    this.state.app=true;
-    if(window.cordova) {
-      this.state.app=true;
-
+    this.state = { acao: "Informações", eventos: [], token: "" };
+    // this.state.app = true;
+    if (window.cordova) {
+      this.state.app = true;
     }
+  }
+
+  logado = token => {
+    if (token)
+      this.setState({ token })
   }
 
 
@@ -75,8 +79,8 @@ export default class App extends React.Component {
           <div
             style={{ height: "100vh", width: "100vw", overflow: "hidden" }}
           >
-            {this.state.app?<VisualizadorAPP />:<Main />}
-            {/* <Login /> */}
+            {this.state.app ? <VisualizadorAPP /> :
+              this.state.token ? <Main /> : <Login logado={this.logado} />}
           </div>
         </MuiThemeProvider>
       </MuiPickersUtilsProvider>

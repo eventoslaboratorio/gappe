@@ -61,14 +61,19 @@ export default class TelaCadastro extends Component {
         console.log(this.state);
         if (this.state.carregando)
             return (
-                <Grid
-                    container
-                    direction="row"
-                    justify="center"
-                    alignItems="center"
-                >
-                    <CircularProgress disableShrink />
-                </Grid>
+                // <Grid
+                //     container
+                //     direction="row"
+                //     justify="center"
+                //     alignItems="center"
+                //     style={{
+                //         marginTop: "25%",
+                //         marginBottom: "80%"
+                //     }}
+                // >
+                //     <CircularProgress disableShrink />
+                // </Grid>
+                <></>
             )
 
         return (

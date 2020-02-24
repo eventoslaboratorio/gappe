@@ -4,11 +4,10 @@ const { incripit, decripit } = require('../config/authentication/AUTH')
 const { getEmail } = require('./GetEmail')
 
 const ref = firebase.database().ref('users')
+
 module.exports = {
     async login(req, res, next) {
         const error = 'Usuário ou Senha inválido'
-
-        console.log(req.body);
 
         if (!req.body.email || !req.body.password)
             return res.json({ error })
@@ -31,7 +30,7 @@ module.exports = {
             email,
             name,
             iat: agora,
-            exp: agora + (60)
+            exp: agora + (30)
         };
 
         const token = encode(userJWT)
@@ -62,11 +61,12 @@ module.exports = {
         return res.json(userAdd.val())
     },
     async validarToken(req, res, next) {
+        const { token } = req.headers
         const error = 'Sessão expirada'
         try {
-            const response = await decode(req.headers.token)
+            const response = await decode(token)
 
-            return res.json(response)
+            return res.json({ response, token })
         } catch (erro) {
             return res.json({ error })
         }
