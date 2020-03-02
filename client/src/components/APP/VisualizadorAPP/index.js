@@ -5,7 +5,6 @@ import {
     IconButton,
     Toolbar,
     Grid,
-    CircularProgress,
     AppBar,
     BottomNavigation,
     Button,
@@ -18,6 +17,7 @@ import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import CardEvento from '../CardEvento';
 import VisualizadorEvento from '../VisualizadorEvento';
 import storage from '../../../config/Storage';
+import Carregando from '../../WEB/Carregando';
 
 export default class VisualizadorAPP extends Component {
 
@@ -93,17 +93,7 @@ export default class VisualizadorAPP extends Component {
     render() {
         if (this.state.carregando)
             return (
-                <Grid
-                    container
-                    direction="row"
-                    justify="center"
-                    alignItems="center"
-                    style={{
-                        marginTop: "40%",
-                    }}
-                >
-                    <CircularProgress disableShrink />
-                </Grid>
+                <Carregando />
             )
         else if (this.state.evento)
             return <VisualizadorEvento

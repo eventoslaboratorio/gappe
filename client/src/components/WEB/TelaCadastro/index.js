@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
 import API from "../../../config/API";
 
-import {
-    CircularProgress,
-    Grid
-} from '@material-ui/core';
 import ListaEventos from '../ListaEventos';
+import Carregando from '../Carregando';
 
 export default class TelaCadastro extends Component {
 
@@ -34,18 +31,7 @@ export default class TelaCadastro extends Component {
     render() {
         if (this.state.carregando)
             return (
-                <Grid
-                    container
-                    direction="row"
-                    justify="center"
-                    alignItems="center"
-                    style={{
-                        marginTop: "50%",
-                        marginBottom: "80%"
-                    }}
-                >
-                    <CircularProgress disableShrink />
-                </Grid>
+                <Carregando />
             )
 
         return (

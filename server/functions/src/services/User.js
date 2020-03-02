@@ -30,7 +30,7 @@ module.exports = {
             email,
             name,
             iat: agora,
-            exp: agora + (30)
+            exp: agora + (60 * 60)
         };
 
         const token = encode(userJWT)

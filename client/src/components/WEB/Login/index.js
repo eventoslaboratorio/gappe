@@ -3,11 +3,12 @@ import {
     Grid,
     TextField,
     Button,
-    CircularProgress
 } from '@material-ui/core/';
 
 import API from '../../../config/API'
 import storage from '../../../config/Storage';
+
+import Carregando from '../Carregando'
 
 export default class Login extends Component {
 
@@ -43,9 +44,9 @@ export default class Login extends Component {
             const response = await API.post('/user/login', user)
             this.setState(response.data)
             if (!this.state.error) {
+                API.defaults.headers.common['token'] = this.state.token;
                 this.props.logado(this.state.token)
                 storage.set('token', this.state.token)
-                API.defaults.headers.common['token'] = this.state.token;
             }
         } catch (error) {
             console.log(error);
@@ -71,6 +72,7 @@ export default class Login extends Component {
     componentDidMount = () => {
         this.setState(this.initialState())
         const token = storage.get('token')
+        API.defaults.headers.common['token'] = token;
         if (token) {
             this.validaToken(token)
             this.setState({ token })
@@ -81,18 +83,7 @@ export default class Login extends Component {
         return (
             <>
                 {this.state.token ?
-                    <Grid
-                        container
-                        direction="row"
-                        justify="center"
-                        alignItems="center"
-                        style={{
-                            marginTop: "25%",
-                            marginBottom: "80%"
-                        }}
-                    >
-                        <CircularProgress disableShrink />
-                    </Grid>
+                    <Carregando />
                     :
                     <Grid
                         container

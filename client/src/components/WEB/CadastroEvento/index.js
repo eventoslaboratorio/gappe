@@ -12,8 +12,9 @@ import 'tinymce/plugins/table';
 import '../../../config/pt_BR';
 
 import { Editor } from '@tinymce/tinymce-react';
-// import { DatePicker, TimePicker } from '@material-ui/pickers';
+import { DatePicker, TimePicker } from '@material-ui/pickers';
 import { ImagePicker } from 'react-file-picker'
+
 import {
     Button,
     Typography,
@@ -63,6 +64,26 @@ export default class DadosEvento extends Component {
             });
         }
     };
+
+    onChangeData = (campo) => {
+        return (event) => {
+            const date = new Date(event._d);
+            this.props.onChange({
+                ...this.props.value,
+                [campo]: date.toLocaleDateString('en-GB').toString()
+            });
+        }
+    }
+
+    onChangeTime = (campo) => {
+        return (event) => {
+            const date = new Date(event._d);
+            this.props.onChange({
+                ...this.props.value,
+                [campo]: date.toLocaleTimeString('en-US').toString()
+            });
+        }
+    }
 
     value(campo) {
         return this.props.value[campo];
@@ -134,29 +155,24 @@ export default class DadosEvento extends Component {
                     justify="flex-start"
                     alignItems="flex-start"
                 >
-                    <TextField
-                        required
-                        label="Inicio"
-                        style={{ marginRight: 30 }}
+                    <DatePicker
+                        label="Data de início"
+                        error=""
                         value={this.value("dateInit")}
-                        onChange={this.onChange("dateInit")}
-                        error={!this.value("dateInit")}
-                        helperText="A data de início do evento é obrigatório."
+                        onChange={this.onChangeData("dateInit")}
                     />
-                    <TextField
-                        required
-                        label="Termino"
-                        style={{ marginRight: 30 }}
+                    <DatePicker
+                        label="Data de término"
+                        error=""
                         value={this.value("dateEnd")}
-                        onChange={this.onChange("dateEnd")}
-                        error={!this.value("dateEnd")}
-                        helperText="A data de término do evento é obrigatório."
+                        onChange={this.onChangeData("dateEnd")}
+                        style={{ marginLeft: 10, marginRight: 10 }}
                     />
-                    <TextField
-                        label="Hora"
-                        style={{ marginTop: 20 }}
+                    <TimePicker
+                        label="Horario"
+                        error=""
                         value={this.value("time")}
-                        onChange={this.onChange("time")}
+                        onChange={this.onChangeTime("time")}
                     />
                 </Grid>
                 <div style={{ marginBottom: 20 }}>

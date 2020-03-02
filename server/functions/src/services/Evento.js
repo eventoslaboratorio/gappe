@@ -6,9 +6,8 @@ const { decode } = require('../config/authentication/JWT')
 module.exports = {
     async index(req, res, next) {
         const { token } = req.headers
-        // const response = await decode(token)
-        // if (!response) return res.json({ error: 'error' })
-        console.log("token", req.headers);
+        const response = await decode(token)
+        if (!response) return res.json({ error: 'error' })
         try {
             const config = configURL(req);
             console.log(config);

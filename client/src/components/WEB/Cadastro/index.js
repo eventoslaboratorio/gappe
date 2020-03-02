@@ -5,13 +5,14 @@ import VisualizadorEvento from '../../APP/VisualizadorEvento';
 import {
     Button,
     Grid,
-    CircularProgress
 } from '@material-ui/core/';
+
 import SaveIcon from '@material-ui/icons/Save';
 import CloseIcon from '@material-ui/icons/Close';
 
 import ListaEventos from '../ListaEventos';
-import CadastroEvento from '../DadosEvento';
+import Carregando from '../Carregando';
+import CadastroEvento from '../CadastroEvento';
 
 export default class TelaCadastro extends Component {
 
@@ -61,19 +62,7 @@ export default class TelaCadastro extends Component {
         console.log(this.state);
         if (this.state.carregando)
             return (
-                // <Grid
-                //     container
-                //     direction="row"
-                //     justify="center"
-                //     alignItems="center"
-                //     style={{
-                //         marginTop: "25%",
-                //         marginBottom: "80%"
-                //     }}
-                // >
-                //     <CircularProgress disableShrink />
-                // </Grid>
-                <></>
+                <Carregando />
             )
 
         return (
