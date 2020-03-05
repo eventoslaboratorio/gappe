@@ -134,32 +134,37 @@ export default class VisualizadorAPP extends Component {
                             modo={"prog"}
                             evento={evento} />) :
 
-                        [<Grid
-                            container
-                            direction="row"
-                            justify="flex-end"
-                            alignItems="flex-end"
-                            style={{
-                                marginTop: "5%",
-                                marginBottom: "5%",
-                            }}
-                        >
-                            <Box marginRight={"5%"}>
-                                <Fab
-                                    color="primary"
-                                    aria-label="add"
-                                    onClick={this.listarEventosDisponiveis}
-                                >
-                                    <AddIcon />
-                                </Fab>
-                            </Box>
-                        </Grid>
-                            ,
-                        this.state.eventosPessoais && this.state.eventosPessoais.map(evento =>
-                            <CardEvento
-                                onCarregarEvento={this.selecionarEvento}
-                                modo={"img3"}
-                                evento={evento} />)]}
+                        [
+                            this.state.eventosPessoais && this.state.eventosPessoais.map(evento =>
+                                <CardEvento
+                                    onCarregarEvento={this.selecionarEvento}
+                                    modo={"img3"}
+                                    evento={evento}
+                                />
+                            )
+                        ]
+                    }
+                    <Grid
+                        container
+                        direction="row"
+                        justify="flex-end"
+                        alignItems="flex-end"
+                        style={{
+                            marginTop: "5%",
+                            marginBottom: "10%",
+                        }}
+                    >
+                        {/* Button to add event */}
+                        <Box marginRight={"5%"}>
+                            <Fab
+                                color="primary"
+                                aria-label="add"
+                                onClick={this.listarEventosDisponiveis}
+                            >
+                                <AddIcon />
+                            </Fab>
+                        </Box>
+                    </Grid>
 
                 </Grid>
             </Grid>

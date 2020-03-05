@@ -36,8 +36,8 @@ export default class Login extends Component {
         })
 
         const user = {
-            email: this.state.email,
-            password: this.state.password,
+            email: encodeURI(this.state.email),
+            password: encodeURI(this.state.password),
         }
 
         try {

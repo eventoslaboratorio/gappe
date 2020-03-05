@@ -61,9 +61,7 @@ export default class TelaCadastro extends Component {
     render() {
         console.log(this.state);
         if (this.state.carregando)
-            return (
-                <Carregando />
-            )
+            return <Carregando />
 
         return (
             <div>

@@ -47,6 +47,6 @@ export default class AdicionarEvento extends Component {
         else
             return <Grid item xs style={{ overflow: "auto" }} >
                 aaa
-        </Grid>
+                </Grid>
     }
 }

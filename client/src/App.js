@@ -18,7 +18,6 @@ import MomentUtils from '@date-io/moment';
 import moment from "moment";
 import "moment/locale/pt-br";
 
-
 import Main from './pages/Main';
 import Login from './components/WEB/Login';
 import VisualizadorAPP from './components/APP/VisualizadorAPP';
@@ -76,11 +75,10 @@ export default class App extends React.Component {
     return (
       <MuiPickersUtilsProvider utils={MomentUtils} locale="pt-br">
         <MuiThemeProvider theme={theme}>
-          <div
-            style={{ height: "100vh", width: "100vw", overflow: "hidden" }}
-          >
+          <div style={{ height: "100vh", width: "100vw", overflow: "hidden" }}          >
             {this.state.app ? <VisualizadorAPP /> :
-              this.state.token ? <Main /> : <Login logado={this.logado} />}
+              this.state.token ? <Main /> : <Login logado={this.logado} />
+            }
           </div>
         </MuiThemeProvider>
       </MuiPickersUtilsProvider>

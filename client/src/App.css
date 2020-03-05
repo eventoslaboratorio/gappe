@@ -1,5 +1,8 @@
-body, #root {
+body,
+#root {
   min-height: 100vh;
   margin: 0px;
 }
-html { font-family: 'Roboto', sans-serif; }
+html {
+  font-family: "Roboto", sans-serif;
+}

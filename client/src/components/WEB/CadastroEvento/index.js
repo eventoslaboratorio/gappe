@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 
-import TextField from '@material-ui/core/TextField';
 import 'tinymce/tinymce';
 
 import 'tinymce/themes/silver';
@@ -11,6 +10,7 @@ import 'tinymce/plugins/paste';
 import 'tinymce/plugins/table';
 import '../../../config/pt_BR';
 
+import TextField from '@material-ui/core/TextField';
 import { Editor } from '@tinymce/tinymce-react';
 import { DatePicker, TimePicker } from '@material-ui/pickers';
 import { ImagePicker } from 'react-file-picker'
@@ -26,6 +26,7 @@ import {
     FormControl,
     Select
 } from '@material-ui/core';
+
 
 export default class DadosEvento extends Component {
 
@@ -50,7 +51,7 @@ export default class DadosEvento extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {}
     }
 
     onChange = (campo) => {
@@ -70,7 +71,7 @@ export default class DadosEvento extends Component {
             const date = new Date(event._d);
             this.props.onChange({
                 ...this.props.value,
-                [campo]: date.toLocaleDateString('en-GB').toString()
+                [campo]: date.toLocaleDateString('en-GB')
             });
         }
     }
@@ -80,13 +81,18 @@ export default class DadosEvento extends Component {
             const date = new Date(event._d);
             this.props.onChange({
                 ...this.props.value,
-                [campo]: date.toLocaleTimeString('en-US').toString()
+                [campo]: date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
             });
         }
     }
 
-    value(campo) {
-        return this.props.value[campo];
+    value = (campo) => this.props.value[campo];
+
+
+    formatDate = (date) => {
+        const dateFormat = new Date(date);
+
+        return dateFormat.toLocaleDateString()
     }
 
     render() {
@@ -157,23 +163,28 @@ export default class DadosEvento extends Component {
                 >
                     <DatePicker
                         label="Data de início"
-                        error=""
-                        value={this.value("dateInit")}
+                        error={!this.value("dateInit")}
+                        helperText="A data de início do evento é obrigatório"
+                        value={this.formatDate(this.value("dateInit"))}
                         onChange={this.onChangeData("dateInit")}
                     />
                     <DatePicker
                         label="Data de término"
-                        error=""
-                        value={this.value("dateEnd")}
+                        error={!this.value("dateEnd")}
+                        helperText="A data de término do evento é obrigatório"
+                        value={this.formatDate(this.value("dateEnd"))}
                         onChange={this.onChangeData("dateEnd")}
                         style={{ marginLeft: 10, marginRight: 10 }}
                     />
                     <TimePicker
                         label="Horario"
-                        error=""
+                        error={!this.value("time")}
+                        helperText="A hora do evento é obrigatório"
                         value={this.value("time")}
                         onChange={this.onChangeTime("time")}
+                        style={{ marginTop: 15, }}
                     />
+                    {this.value("time")}
                 </Grid>
                 <div style={{ marginBottom: 20 }}>
                     <FormControl style={{ minWidth: "200px", marginTop: 30 }}>

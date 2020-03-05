@@ -17,9 +17,10 @@ import AssignmentIcon from '@material-ui/icons/Assignment';
 import StarIcon from '@material-ui/icons/Star';
 import MapIcon from '@material-ui/icons/Map';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
-import CardEvento from '../CardEvento';
 import PersonIcon from '@material-ui/icons/Person';
+import AccessTimeIcon from '@material-ui/icons/AccessTime';
 
+import CardEvento from '../CardEvento';
 
 export default class VisualizadorEvento extends Component {
     constructor() {
@@ -119,25 +120,25 @@ class Informacao extends Component {
                     height: "100%"
                 }}>
                     {(this.props.evento.dateInit || this.props.evento.time) && <div>
-
                         <Typography style={{ color: "gray" }} variant="h6" >
                             <Grid
                                 container
                                 direction="row"
                                 alignItems="center"
                             >
-                                <DateRangeIcon color="primary" style={{ margin: "5px" }} />
-                                {this.props.evento.dateInit + (this.props.evento.dateEnd ? (" - " + this.props.evento.dateEnd) : "")}
-                            </Grid></Typography></div>}
+                                <AccessTimeIcon color="primary" style={{ margin: "5px" }} />
+                                {this.props.evento.time}
+                                {this.props.evento.dateInit ? <DateRangeIcon color="primary" style={{ margin: "5px" }} /> : ""}
+                                {this.props.evento.dateInit ? this.props.evento.dateInit + (this.props.evento.dateEnd ? (" - " + this.props.evento.dateEnd) : "") : ""}
+                            </Grid>
+                        </Typography></div>}
                     {(this.props.evento.speaker) && <div>
-
                         <Typography style={{ color: "gray" }} variant="h6" >
                             <Grid
                                 container
                                 direction="row"
                                 alignItems="center"
                             >
-
                                 <PersonIcon color="primary" style={{ margin: "5px" }} />
                                 {this.props.evento.speaker}
                             </Grid></Typography></div>}
@@ -178,6 +179,7 @@ class Informacao extends Component {
                         </Typography>
                     </div>}
                 </div>
-            </Grid>);
+            </Grid>
+        );
     }
 }
