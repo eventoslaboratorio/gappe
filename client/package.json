@@ -17,7 +17,7 @@
     "@material-ui/pickers": "^3.2.9",
     "@material-ui/system": "^4.5.1",
     "@tinymce/tinymce-react": "^3.3.2",
-    "axios": "^0.19.0",
+    "axios": "^0.21.1",
     "bootstrap": "^4.4.1",
     "cordova-android": "^8.1.0",
     "cordova-browser": "^6.0.0",
